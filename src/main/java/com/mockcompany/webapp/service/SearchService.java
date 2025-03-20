@@ -21,6 +21,13 @@ public class SearchService {
     }
 
     public Collection<ProductItem> search(String query) {
-        return Collections.emptyList(); // Break the tests by returning an empty list
+        List<ProductItem> results = new ArrayList<>();
+        for (ProductItem item : productItemRepository.findAll()) {
+            if (item.getName().toLowerCase().contains(query.toLowerCase()) ||
+                item.getDescription().toLowerCase().contains(query.toLowerCase())) {
+                results.add(item);
+            }
+        }
+        return results;
     }
 }
